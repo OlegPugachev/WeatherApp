@@ -1,15 +1,15 @@
-//
-//  ContentView.swift
-//  WeatherApp
-//
-//  Created by Oleg on 13.02.2025.
-//
 
 import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
     @State private var location: String = ""
+    @State var forecast: Forecast? = nil
+    let dateFormatter = DateFormatter()
+    
+    init() {
+        dateFormatter.dateFormat = "E, MMM, d"
+    }
     var body: some View {
         
         NavigationView {
@@ -24,7 +24,35 @@ struct ContentView: View {
                             .font(.title3)
                     }
                 }
-                Spacer()
+                if let forecast = forecast {
+                    List(forecast.daily, id: \.dt) { day in
+                        VStack(alignment: .leading) {
+                            Text(dateFormatter.string(from: day.dt))
+                                .fontWeight(.bold)
+                            HStack {
+                                Image(systemName: "hourglass")
+                                    .font(.title)
+                                    .frame(width: 50, height: 50)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(.green))
+                                VStack(alignment: .leading){
+                                    Text(day.weather[0].description.capitalized)
+                                    HStack {
+                                        Text("High: \(day.temp.max, specifier: "%.0f")")
+                                        Text("Low: \(day.temp.min, specifier: "%.0f")")
+                                    }
+                                    HStack {
+                                        Text("Clouds: \(day.clouds)")
+                                        Text("POP: \(day.pop)")
+                                    }
+                                    Text("Humidity: \(day.humidity)")
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(PlainListStyle())
+                }else {
+                    Spacer()
+                }
             }.padding(.horizontal)
                 .navigationTitle("Weather")
         }
@@ -32,8 +60,6 @@ struct ContentView: View {
     
     func getWeatherForecast(for location: String) {
         let apiService = APIService.shared
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, MMM, d"
         CLGeocoder().geocodeAddressString(location) { (placemarks, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -45,16 +71,17 @@ struct ContentView: View {
                                    dateDecodingStrategy: .secondsSince1970) { (result: Result<Forecast,APIService.APIError>) in
                     switch result {
                         case .success(let forecast):
-                            for day in forecast.daily {
-                                print(dateFormatter.string(from: day.dt))
-                                print("Max: ", day.temp.max)
-                                print("Min: ", day.temp.min)
-                                print("Humidity: ", day.humidity)
-                                print("Description: ", day.weather[0].description)
-                                print("Clouds: ", day.clouds)
-                                print("pop: ", day.pop)
-                                print("IconURL: ", day.weather[0].weatherIconURL)
-                            }
+                            self.forecast = forecast
+                            //                            for day in forecast.daily {
+                            //                                print(dateFormatter.string(from: day.dt))
+                            //                                print("Max: ", day.temp.max)
+                            //                                print("Min: ", day.temp.min)
+                            //                                print("Humidity: ", day.humidity)
+                            //                                print("Description: ", day.weather[0].description)
+                            //                                print("Clouds: ", day.clouds)
+                            //                                print("pop: ", day.pop)
+                            //                                print("IconURL: ", day.weather[0].weatherIconURL)
+                            //                            }
                         case .failure(let apiError):
                             switch apiError {
                                 case .error(let errorString):
