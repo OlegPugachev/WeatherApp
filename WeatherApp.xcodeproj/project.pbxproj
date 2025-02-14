@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7C078E992D5F7CCA00B96AAA /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7C078E982D5F7CCA00B96AAA /* SDWebImageSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7C518D5B2D5E44FC0032E26E /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C078E992D5F7CCA00B96AAA /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = WeatherApp;
 			packageProductDependencies = (
+				7C078E982D5F7CCA00B96AAA /* SDWebImageSwiftUI */,
 			);
 			productName = WeatherApp;
 			productReference = 7C518D5B2D5E44FC0032E26E /* WeatherApp.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 7C518D522D5E44FC0032E26E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7C078E972D5F7CCA00B96AAA /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7C518D5C2D5E44FC0032E26E /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C078E972D5F7CCA00B96AAA /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7C078E982D5F7CCA00B96AAA /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C078E972D5F7CCA00B96AAA /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7C518D532D5E44FC0032E26E /* Project object */;
 }
