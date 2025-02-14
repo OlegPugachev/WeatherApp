@@ -22,8 +22,6 @@ struct ForecastViewModel {
         return numberFormatter
     }
     
-    
-    
     var day: String {
         return Self.dateFormatter.string(from: forecast.dt)
     }

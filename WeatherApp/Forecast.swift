@@ -1,9 +1,3 @@
-//
-//  Forecast.swift
-//  WeatherApp
-//
-//  Created by Oleg on 13.02.2025.
-//
 
 import Foundation
 
