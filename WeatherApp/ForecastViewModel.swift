@@ -3,7 +3,7 @@ import Foundation
 
 struct ForecastViewModel {
     let forecast: Forecast.Daily
-    var system: Int = 0 
+    var system: TempUnits = .celsius
     
     private static var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
@@ -25,7 +25,7 @@ struct ForecastViewModel {
     
     func convert(_ temp: Double) -> Double {
         let celsius = temp - 273.5
-        if system == 0 {
+        if system == .celsius {
             return celsius
         } else {
             return (celsius * 9.0 / 5.0) + 32.0
