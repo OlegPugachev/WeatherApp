@@ -1,0 +1,9 @@
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+//MARK: - API Keys
+OPEN_WEATHER_MAP_KEY =
+//MARK: - Server URLs
+BASE_URL = https:/$()/api.openweathermap.org
+

@@ -34,7 +34,9 @@ class ForecastListViewModel: ObservableObject {
     }
     
     func getWeatherForecast() {
-        let yourApiKey = "your_api_key"
+ 
+        let baseURL = Config.baseURL
+        let openWeatherMapKEY = Config.openWeatherMapKEY
         
         storageLocation = location
         UIApplication.shared.endEditing()
@@ -61,10 +63,12 @@ class ForecastListViewModel: ObservableObject {
             }
             if let lat = placemarks?.first?.location?.coordinate.latitude,
                let lon = placemarks?.first?.location?.coordinate.longitude {
+                
                 // Don't forget to use your own key
-                        apiService.getJSON(urlString: "https://api.openweathermap.org/data/3.0/onecall?lat=\(lat)&lon=\(lon)&exclude=current,minutely,hourly,alerts&appid=\(yourApiKey)",
+                let urlString = "\(baseURL)/data/3.0/onecall?lat=\(lat)&lon=\(lon)&exclude=current,minutely,hourly,alerts&appid=\(openWeatherMapKEY)"
+                        
+                apiService.getJSON(urlString: urlString,
                                            dateDecodingStrategy: .secondsSince1970) { (result: Result<Forecast,APIService.APIError>) in
-
                     switch result {
                     case .success(let forecast):
                         DispatchQueue.main.async {
